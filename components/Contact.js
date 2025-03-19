@@ -1,5 +1,6 @@
 "use client";
 
+import { motion } from "framer-motion";
 import React, { useState } from 'react';
 
 export default function Contact() {
@@ -49,7 +50,15 @@ export default function Contact() {
 
   return (
     <section id="contact" style={styles.section}>
-      <h2 style={styles.sectionHeading}>Contact Me</h2>
+      <motion.h2
+        style={styles.sectionHeading}
+        initial={{ opacity: 0, y: -50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+      >
+        Contact Me
+        <span style={styles.sectionHeadingUnderline}></span>
+      </motion.h2>
 
       {submitted ? (
         <p style={styles.successMessage}>
@@ -147,11 +156,29 @@ const styles = {
     textAlign: "center",
   },
   sectionHeading: {
-    fontSize: "4rem",
+    fontSize: "3rem",
     fontFamily: "'Roboto', sans-serif",
-    fontWeight: "400",
-    marginBottom: "1rem",
-    color: "#ffff",
+    fontWeight: "600",
+    marginBottom: "3rem",
+    color: "#fff",
+    position: "relative",
+    display: "inline-block",
+    background: "#333", // Dark background box
+    padding: "1rem 2rem",
+    borderRadius: "10px",
+    letterSpacing: "1px",
+    boxShadow: "0 8px 20px rgba(0, 0, 0, 0.3)",
+    overflow: "hidden",
+  },
+  sectionHeadingUnderline: {
+    content: '""',
+    position: "absolute",
+    left: "8%", // Start a little in from the left
+    bottom: "15px", // Positioned inside the box
+    width: "100%", // Underline spans most of the text
+    height: "8px", // Thickness of the underline
+    backgroundColor: "#ff5a5f", // Red underline
+    zIndex: 0, // Behind the text but inside the box
   },
   contactText: {
     fontSize: "1.2rem",

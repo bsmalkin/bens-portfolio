@@ -1,8 +1,11 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useState } from "react";
 
 const WorkExperience = () => {
+  const [hoveredIndex, setHoveredIndex] = useState(null);
+
   const experiences = [
     {
       role: "Software Engineer",
@@ -31,166 +34,69 @@ const WorkExperience = () => {
   ];
 
   return (
-    <section id="experience" style={styles.section}>
+    <section
+      id="experience"
+      className="flex flex-col justify-center items-center w-full px-4 py-16 text-white"
+    >
       <motion.h2
-        style={styles.sectionHeading}
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
-        >
-        Work Experience
-        <span style={styles.sectionHeadingUnderline}></span>
-      </motion.h2>
-      <motion.div
-        style={styles.timelineContainer}
-        initial="hidden"
-        animate="visible"
-        variants={containerVariants}
+        className="relative inline-block text-4xl md:text-5xl font-semibold mb-12 bg-neutral-800 px-8 py-4 rounded-xl shadow-xl"
       >
-        {experiences.map((item, index) => (
+        Work Experience
+        <span className="absolute left-[8%] bottom-3 w-4/5 h-2 bg-[#ff5a5f] z-0"></span>
+      </motion.h2>
+
+      <div className="w-full max-w-[1200px] flex flex-col gap-12">
+        {experiences.map((experience, index) => (
           <motion.div
             key={index}
-            style={styles.timelineItem}
-            variants={cardVariants}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{
+              duration: 0.6,
+              delay: index * 0.2,
+              ease: "easeInOut",
+            }}
+            viewport={{ once: true }}
+            className={`relative flex items-center justify-start bg-[#1F1F1F] rounded-3xl shadow-2xl p-8 gap-8 transition-transform duration-300 ${
+              hoveredIndex === index
+                ? "scale-105 shadow-[#ff7e5f]"
+                : "hover:scale-102"
+            }`}
+            onMouseEnter={() => setHoveredIndex(index)}
+            onMouseLeave={() => setHoveredIndex(null)}
           >
-            <div style={styles.logoWrapper}>
+            {/* Experience Logo */}
+            <div className="absolute left-0 -ml-12 w-24 h-24 rounded-full overflow-hidden shadow-md">
               <img
-                src={item.logo}
-                alt={`${item.company} logo`}
-                style={styles.companyLogo}
+                src={experience.logo}
+                alt={experience.company}
+                className="w-full h-full object-cover"
               />
             </div>
-            <motion.div
-              style={styles.experienceContent}
-              whileHover={{ scale: 1.05, boxShadow: "0px 10px 20px rgba(0, 0, 0, 0.3)" }}
-              transition={{ duration: 0.3, ease: "easeInOut" }}
-            >
-              <h3 style={styles.experienceTitle}>{item.role}</h3>
-              <h2 style={styles.experienceCompany}>{item.company}</h2>
-              <span style={styles.experienceDate}>{item.duration}</span>
-              <p style={styles.experienceDescription}>{item.description}</p>
-            </motion.div>
+
+            {/* Experience Content */}
+            <div className="flex flex-col justify-center items-start w-full md:w-4/5 bg-[#1F1F1F] rounded-3xl p-8">
+              <h3 className="text-2xl font-semibold text-[#ff7e5f] mb-4">
+                {experience.role}
+              </h3>
+              <p className="text-lg leading-8 text-white mb-6">
+                {experience.company}
+              </p>
+              <span className="text-sm text-gray-400 mb-6">
+                {experience.duration}
+              </span>
+              <p className="text-lg leading-8 text-white mb-6">
+                {experience.description}
+              </p>
+            </div>
           </motion.div>
         ))}
-      </motion.div>
+      </div>
     </section>
   );
 };
 
 export default WorkExperience;
-
-const styles = {
-  section: {
-    padding: "4rem 2rem",
-    color: "#ffffff",
-    textAlign: "center",
-  },
-  sectionHeading: {
-    fontSize: "3rem",
-    fontFamily: "'Roboto', sans-serif",
-    fontWeight: "600",
-    marginBottom: "3rem",
-    color: "#fff",
-    position: "relative",
-    display: "inline-block",
-    background: "#333", // Dark background box
-    padding: "1rem 2rem",
-    borderRadius: "10px",
-    letterSpacing: "1px",
-    boxShadow: "0 8px 20px rgba(0, 0, 0, 0.3)",
-    overflow: "hidden",
-  },
-  sectionHeadingUnderline: {
-    content: '""',
-    position: "absolute",
-    left: "8%", // Start a little in from the left
-    bottom: "15px", // Positioned inside the box
-    width: "100%", // Underline spans most of the text
-    height: "8px", // Thickness of the underline
-    backgroundColor: "#ff5a5f", // Red underline
-    zIndex: 0, // Behind the text but inside the box
-  },
-  timelineContainer: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    position: "relative",
-    width: "100%",
-  },
-  timelineItem: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    position: "relative",
-    width: "65%",
-    marginBottom: "2rem",
-  },
-  logoWrapper: {
-    width: "80px",
-    height: "80px",
-    borderRadius: "50%",
-    overflow: "hidden",
-    background: "#fff",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
-  },
-  companyLogo: {
-    width: "100%",
-    height: "100%",
-    objectFit: "cover",
-  },
-  experienceContent: {
-    background: "#333",
-    padding: "1.5rem",
-    borderRadius: "12px",
-    boxShadow: "0 8px 16px rgba(0, 0, 0, 0.2)",
-    maxWidth: "80%",
-    minWidth: "80%",
-    textAlign: "left",
-    margin: "0 20px",
-    transition: "transform 0.3s ease, box-shadow 0.3s ease",
-  },
-  experienceTitle: {
-    fontSize: "1.5rem",
-    fontWeight: "bold",
-    marginBottom: "0.5rem",
-  },
-  experienceCompany: {
-    fontSize: "1.2rem",
-    color: "#ddd",
-    marginBottom: "0.5rem",
-  },
-  experienceDate: {
-    fontSize: "1rem",
-    color: "#bbb",
-    marginBottom: "1rem",
-    display: "block",
-  },
-  experienceDescription: {
-    fontSize: "1rem",
-    color: "#ccc",
-    lineHeight: "1.6",
-  },
-};
-
-const containerVariants = {
-  hidden: {
-    opacity: 0,
-    y: 50,
-  },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      staggerChildren: 0.2,
-    },
-  },
-};
-
-const cardVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0 },
-};

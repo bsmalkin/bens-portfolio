@@ -1,161 +1,96 @@
 "use client";
 
+import React, { useState } from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
-const projects = [
-  {
-    title: "Quick Trader",
-    description:
-      "Coming Soon",
-    image: "/image1.png",
-    learnMoreLink: "#",
-  },
-  {
-    title: "Project Two",
-    description:
-      "Coming Soon",
-    image: "/image1.png",
-    learnMoreLink: "#",
-  },
-  {
-    title: "Project Three",
-    description:
-        "Coming Soon",
-    image: "/image1.png",
-    learnMoreLink: "#",
-  },
-];
+export default function Projects() {
+  const [hoveredIndex, setHoveredIndex] = useState(null);
 
-const Projects = () => {
+  const projects = [
+    {
+      title: "AI-Powered Portfolio Generator",
+      description:
+        "AI-powered personal portfolio generator that automates resume analysis and generates personalized websites with GPT-4, Next.js, and TailwindCSS.",
+      image: "/blogo.jpg",
+    },
+    {
+      title: "E-Commerce Platform",
+      description:
+        "Full-stack e-commerce platform with shopping cart, payment gateway integration, and admin dashboard using React, Node.js, and MongoDB.",
+      image: "/blogo.jpg",
+    },
+    {
+      title: "Crypto Trading Bot",
+      description:
+        "Automated crypto trading bot using Python, leveraging real-time market data, technical analysis, and Binance API for executing trades.",
+      image: "/blogo.jpg",
+    },
+  ];
+
   return (
-    <section id="projects" style={styles.section}>
+    <section
+      id="projects"
+      className="flex flex-col justify-center items-center w-full px-4 py-16 text-white"
+    >
       <motion.h2
-        style={styles.sectionHeading}
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
+        className="relative inline-block text-4xl md:text-5xl font-semibold mb-12 bg-neutral-800 px-8 py-4 rounded-xl shadow-xl"
       >
         Projects
-        <span style={styles.sectionHeadingUnderline}></span>
+        <span className="absolute left-[8%] bottom-3 w-4/5 h-2 bg-[#ff5a5f] z-0"></span>
       </motion.h2>
-      <div style={styles.projectContainer}>
+
+      <div className="w-full max-w-[1200px] flex flex-col gap-12">
         {projects.map((project, index) => (
           <motion.div
             key={index}
-            style={{
-              ...styles.projectCard,
-              marginLeft: index % 2 === 0 ? "0" : "20%",
-              marginRight: index % 2 === 0 ? "20%" : "0",
-              width: "80%",
-              flexDirection: index % 2 === 0 ? "row" : "row-reverse",
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{
+              duration: 0.6,
+              delay: index * 0.2,
+              ease: "easeInOut",
             }}
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: index * 0.2 }}
+            viewport={{ once: true }}
+            className={`flex flex-col md:flex-row ${
+              index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
+            } items-center bg-[#1F1F1F] rounded-3xl shadow-2xl p-8 gap-8 transition-transform duration-300 ${
+              hoveredIndex === index
+                ? "scale-105 shadow-[#ff7e5f]"
+                : "hover:scale-102"
+            }`}
+            onMouseEnter={() => setHoveredIndex(index)}
+            onMouseLeave={() => setHoveredIndex(null)}
           >
-            <div style={styles.imageWrapper}>
-              <img src={project.image} alt={project.title} style={styles.projectImage} />
+            {/* Project Image */}
+            <div className="w-full md:w-1/2 flex justify-center">
+              <Image
+                src={project.image}
+                alt={project.title}
+                width={500}
+                height={300}
+                className="rounded-xl object-cover shadow-md"
+              />
             </div>
-            <div style={{ ...styles.projectInfo, textAlign: index % 2 === 0 ? "left" : "right" }}>
-              <h3 style={styles.projectTitle}>{project.title}</h3>
-              <p style={styles.projectDescription}>{project.description}</p>
-              <div style={styles.buttonContainer}>
-                <a href={project.learnMoreLink} style={styles.button}>Learn More</a>
-              </div>
+
+            {/* Project Content */}
+            <div className="w-full md:w-1/2 flex flex-col justify-center items-start">
+              <h3 className="text-2xl font-semibold text-[#ff7e5f] mb-4">
+                {project.title}
+              </h3>
+              <p className="text-lg leading-8 text-white mb-6">
+                {project.description}
+              </p>
+              <button className="bg-[#ff5a5f] text-white px-6 py-3 rounded-lg font-medium hover:bg-[#ff7e5f] transition-colors duration-300">
+                View Project
+              </button>
             </div>
           </motion.div>
         ))}
       </div>
     </section>
   );
-};
-
-export default Projects;
-
-const styles = {
-  section: {
-    padding: "4rem 2rem",
-    color: "#ffffff",
-    textAlign: "center",
-  },
-  sectionHeading: {
-    fontSize: "3rem",
-    fontFamily: "'Roboto', sans-serif",
-    fontWeight: "600",
-    marginBottom: "3rem",
-    color: "#fff",
-    position: "relative",
-    display: "inline-block",
-    background: "#333", // Dark background box
-    padding: "1rem 2rem",
-    borderRadius: "10px",
-    letterSpacing: "1px",
-    boxShadow: "0 8px 20px rgba(0, 0, 0, 0.3)",
-    overflow: "hidden",
-  },
-  sectionHeadingUnderline: {
-    content: '""',
-    position: "absolute",
-    left: "8%", // Start a little in from the left
-    bottom: "15px", // Positioned inside the box
-    width: "100%", // Underline spans most of the text
-    height: "8px", // Thickness of the underline
-    backgroundColor: "#ff5a5f", // Red underline
-    zIndex: 0, // Behind the text but inside the box
-  },
-  projectContainer: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    gap: "3rem",
-    marginTop: "2rem",
-  },
-  projectCard: {
-    display: "flex",
-    alignItems: "center",
-    background: "#333",
-    borderRadius: "12px",
-    marginBottom: "20px",
-    padding: "3rem",
-    maxWidth: "1100px",
-    width: "100%",
-    gap: "2rem",
-    boxShadow: "0 8px 16px rgba(0, 0, 0, 0.2)",
-  },
-  imageWrapper: {
-    flex: "1",
-  },
-  projectImage: {
-    width: "100%",
-    borderRadius: "8px",
-  },
-  projectInfo: {
-    flex: "1",
-  },
-  projectTitle: {
-    textAlign: "center",
-    fontSize: "2rem",
-    fontWeight: "bold",
-    marginBottom: "0.5rem",
-  },
-  projectDescription: {
-    textAlign: "center",
-    fontSize: "1.3rem",
-    color: "#ccc",
-    marginBottom: "1rem",
-  },
-  buttonContainer: {
-    display: "flex",
-    gap: "1rem",
-    justifyContent: "center",
-  },
-  button: {
-    textDecoration: "none",
-    color: "#fff",
-    background: "#ff5a5f",
-    padding: "1rem 2rem",
-    borderRadius: "6px",
-    fontWeight: "bold",
-    transition: "background 0.3s ease",
-  },
-};
+}

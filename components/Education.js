@@ -18,7 +18,7 @@ const EducationAndCertifications = () => {
       institution: "Amazon Web Services",
       duration: "Issued September 2024",
       description: "",
-      logo: "/awslogo2.svg",
+      logo: "/aws.jpg",
       type: "Certification",
     },
   ];
@@ -98,7 +98,7 @@ const styles = {
     display: "grid",
     gridTemplateColumns: "repeat(auto-fit, minmax(350px, 1fr))", // Allows responsiveness
     gap: "2rem",
-    maxWidth: "60%", // Controls max width
+    maxWidth: "100%", // Controls max width
     margin: "0 auto",
     justifyContent: "center",
     alignItems: "center",
