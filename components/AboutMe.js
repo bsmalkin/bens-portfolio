@@ -36,14 +36,14 @@ export default function AboutMe() {
         className="relative inline-block text-5xl font-semibold mb-12 bg-[#333] text-white py-4 px-8 rounded-lg shadow-xl tracking-wide overflow-hidden"
       >
         About Me
-        <span className="absolute left-[8%] bottom-[15px] w-full h-2 bg-[#ff5a5f] z-0"></span>
+        <span className="absolute left-[8%] bottom-[10px] w-full h-2 bg-[#ff5a5f] z-0"></span>
       </motion.h2>
 
-      <div className="bg-[#1F1F1F] rounded-2xl shadow-2xl p-16 w-full max-w-[50%]">
+      <div className="bg-[#1F1F1F] rounded-2xl shadow-2xl p-16 w-full max-w-[70%]">
         <div className="flex flex-col justify-center items-center w-full gap-8">
           {/* About Me Text Section */}
           <div className="w-full pr-8 max-w-full">
-            <h3 className="text-2xl text-[#ff7e5f] font-light mt-6 mb-2">
+            <h3 className="text-2xl text-[#ff7e5f] font-medium mt-6 mb-2">
               Intro
             </h3>
             <p className="text-white text-lg leading-8">
@@ -80,7 +80,7 @@ export default function AboutMe() {
               strategy, client relations, and operational efficiency.
             </p>
 
-            <h3 className="text-2xl text-[#ff7e5f] font-light mt-6 mb-2">
+            <h3 className="text-2xl text-[#ff7e5f] font-medium mt-6 mb-2">
               Interests
             </h3>
             <p className="text-white text-lg leading-8">
@@ -98,13 +98,13 @@ export default function AboutMe() {
           {/* Skills Section */}
           <div className="w-full max-w-[1000px] py-8 text-center">
             <h3 className="text-3xl font-semibold text-white mb-8">
-              Technical Skills
+              My Tech-Stack
             </h3>
             <div className="grid grid-cols-[repeat(auto-fill,minmax(120px,1fr))] gap-4 justify-items-center mx-auto">
               {skills.map((skill, index) => (
                 <div
                   key={index}
-                  className={`flex flex-col items-center justify-center p-4 rounded-lg shadow-lg w-[120px] h-[120px] bg-[#1A1A1A] cursor-pointer transition-all duration-300 ease-in-out ${
+                  className={`flex flex-col items-center justify-center p-4 rounded-lg shadow-lg w-[120px] h-[120px] bg-[#333333] cursor-pointer transition-all duration-300 ease-in-out ${
                     hoveredIndex === index
                       ? "scale-110 rotate-[3deg] shadow-[0_0_20px_rgba(255,126,95,0.8)]"
                       : "shadow-[0_0_10px_rgba(255,126,95,0.5)]"

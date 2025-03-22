@@ -37,13 +37,13 @@ export default function Projects() {
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
-        className="relative inline-block text-4xl md:text-5xl font-semibold mb-12 bg-neutral-800 px-8 py-4 rounded-xl shadow-xl"
+        className="relative inline-block text-5xl font-semibold mb-12 bg-[#333] text-white py-4 px-8 rounded-lg shadow-xl tracking-wide overflow-hidden"
       >
-        Projects
-        <span className="absolute left-[8%] bottom-3 w-4/5 h-2 bg-[#ff5a5f] z-0"></span>
+        My Projects
+        <span className="absolute left-[8%] bottom-[10px] w-full h-2 bg-[#ff5a5f] z-0"></span>
       </motion.h2>
 
-      <div className="w-full max-w-[1200px] flex flex-col gap-12">
+      <div className="w-full max-w-screen-lg flex flex-col gap-12">
         {projects.map((project, index) => (
           <motion.div
             key={index}
@@ -57,7 +57,7 @@ export default function Projects() {
             viewport={{ once: true }}
             className={`flex flex-col md:flex-row ${
               index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
-            } items-center bg-[#1F1F1F] rounded-3xl shadow-2xl p-8 gap-8 transition-transform duration-300 ${
+            } items-center bg-[#1F1F1F] rounded-3xl shadow-2xl p-6 sm:p-8 gap-6 sm:gap-8 transition-transform duration-300 ${
               hoveredIndex === index
                 ? "scale-105 shadow-[#ff7e5f]"
                 : "hover:scale-102"
@@ -72,16 +72,16 @@ export default function Projects() {
                 alt={project.title}
                 width={500}
                 height={300}
-                className="rounded-xl object-cover shadow-md"
+                className="rounded-xl object-cover shadow-md w-full h-auto"
               />
             </div>
 
             {/* Project Content */}
             <div className="w-full md:w-1/2 flex flex-col justify-center items-start">
-              <h3 className="text-2xl font-semibold text-[#ff7e5f] mb-4">
+              <h3 className="text-xl sm:text-2xl font-semibold text-[#ff7e5f] mb-4">
                 {project.title}
               </h3>
-              <p className="text-lg leading-8 text-white mb-6">
+              <p className="text-base sm:text-lg leading-7 sm:leading-8 text-white mb-6">
                 {project.description}
               </p>
               <button className="bg-[#ff5a5f] text-white px-6 py-3 rounded-lg font-medium hover:bg-[#ff7e5f] transition-colors duration-300">

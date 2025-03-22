@@ -183,6 +183,7 @@ const styles = {
   contactText: {
     fontSize: "1.2rem",
     marginBottom: "2rem",
+    color: "#FFFFFF",
   },
   contactForm: {
     maxWidth: "600px",
